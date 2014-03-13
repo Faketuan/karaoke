@@ -120,11 +120,17 @@
 	}
 
 //load current room info from database
-	function getCurrentRoomInfo($connection){
+	function getCurrentRoomInfo($connection,$user_id){
+		// get room user is in
+		$uresult = mysqli_query($connection,"SELECT * FROM `users` WHERE `guid` = '$user_id' LIMIT 0,1");
+		$urow = mysqli_fetch_array($uresult);
+
+		$currentRoomId = $urow['currentRoomId'];
+		
 		$currentRoomId = "1";
-		$currentSongData = mysqli_query($connection,"SELECT * FROM `games` WHERE `id` = '$currentRoomId' LIMIT 0,1");
-		$row = mysqli_fetch_array($currentSongData);
-		return $row;
+		$gresult = mysqli_query($connection,"SELECT * FROM `games` WHERE `id` = '$currentRoomId' LIMIT 0,1");
+		$grow = mysqli_fetch_array($gresult);
+		return $grow;
 	}
 
 //load current song from database
@@ -203,27 +209,23 @@
 							<h1>change current song</h1>
 								WIP
 							<h1>room info</h1>
-						<?php
-							$result = mysqli_query($mysqli,"SELECT * FROM `games` WHERE `id` = '1' LIMIT 0,1");
+								<?php
+									$currentRoomData = getCurrentRoomInfo($mysqli,$user_id);
 
-							while($row = mysqli_fetch_array($result)){
-								echo "id: ".$row['id']."<br>";
-								echo "host: ".$row['host']."<br>";
-								echo "songID: ".$row['currentSongId']."<br>";
-								switch ($row['playStatus']) {
-									case '1':
-										$playStatusName = "Playing";
-										break;
-									default:
-										$playStatusName = "Paused";
-										break;
-								}
-								echo "playStatus: ".$row['playStatus']." ($playStatusName)<br>";
-								echo "playTime: ".$row['playTime']." (".secondsToTimeCode($row['playTime']).")";
-
-								$currentRoomData = $row;
-							}
-						?>
+									echo "id: ".$currentRoomData['id']."<br>";
+									echo "host: ".$currentRoomData['host']."<br>";
+									echo "songID: ".$currentRoomData['currentSongId']."<br>";
+									switch ($currentRoomData['playStatus']) {
+										case '1':
+											$playStatusName = "Playing";
+											break;
+										default:
+											$playStatusName = "Paused";
+											break;
+									}
+									echo "playStatus: ".$currentRoomData['playStatus']." ($playStatusName)<br>";
+									echo "playTime: ".$currentRoomData['playTime']." (".secondsToTimeCode($currentRoomData['playTime']).")";
+								?>
 							<h1>song info</h1>
 						<?php
 							$currentSongData = getCurrentSongInfo($mysqli,$currentRoomData);
