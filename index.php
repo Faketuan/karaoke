@@ -118,6 +118,21 @@
 		$t = round($seconds);
 		return sprintf('%02d:%02d:%02d', ($t/3600),($t/60%60), $t%60);
 	}
+
+//load current room info from database
+	function getCurrentRoomInfo($connection){
+		$currentSongData = mysqli_query($connection,"SELECT * FROM `songs` WHERE `id` = '$songID' LIMIT 0,1");
+		$row = mysqli_fetch_array($currentSongData);
+		return $row;
+	}
+
+//load current song from database
+	function getCurrentSongInfo($connection,$roominfo){
+		$songID = $roominfo['currentSongId'];
+		$currentSongData = mysqli_query($connection,"SELECT * FROM `songs` WHERE `id` = '$songID' LIMIT 0,1");
+		$row = mysqli_fetch_array($currentSongData);
+		return $row;
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -204,11 +219,14 @@
 								}
 								echo "playStatus: ".$row['playStatus']." ($playStatusName)<br>";
 								echo "playTime: ".$row['playTime']." (".secondsToTimeCode($row['playTime']).")";
+
+								$currentRoomData = $row;
 							}
 						?>
 							<h1>song info</h1>
-								WIP
 						<?php
+							$currentSongData = getCurrentSongInfo($mysqli,$currentRoomData);
+							echo $currentSongData['title'];
 					}else{
 						include "include/$page.php";
 					}
