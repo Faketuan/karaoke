@@ -121,7 +121,8 @@
 
 //load current room info from database
 	function getCurrentRoomInfo($connection){
-		$currentSongData = mysqli_query($connection,"SELECT * FROM `songs` WHERE `id` = '$songID' LIMIT 0,1");
+		$currentRoomId = "1";
+		$currentSongData = mysqli_query($connection,"SELECT * FROM `games` WHERE `id` = '$currentRoomId' LIMIT 0,1");
 		$row = mysqli_fetch_array($currentSongData);
 		return $row;
 	}
