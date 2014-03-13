@@ -1,0 +1,137 @@
+body{
+	font-family: 'Roboto', sans-serif;
+	color: #3f3f3f;
+	background-color: #e5e5e5;
+}
+
+.header-wrapper{
+	width: 100%;
+	background-color: #fafafa;
+	height: 62px;
+
+	position: fixed;
+}
+
+	.header-left{
+		float: left;
+	}
+
+	.header-right{
+		float: right;
+	}
+
+		.user-signin-button{
+			margin: 10px 15px;
+			width: 132px;
+			height: 42px;
+			background-image: url('White-signin-Medium-base-32dp.png');
+		}
+
+		.user-signin-button:hover{
+			background-image: url('White-signin-Medium-hover-32dp.png');
+		}
+
+		.user-signin-button:active{
+			background-image: url('White-signin-Medium-press-32dp.png');
+		}
+
+	.player_menu{
+		position: fixed;
+		width: 200px;
+		top: 62px;
+		bottom: 50px;
+
+		background-color: #fafafa;
+	}
+
+		.player_menu_settings_entry{
+			padding: 10px;
+			border-bottom: 1px solid silver;
+
+			cursor: pointer;
+		}
+
+		.player_menu_settings_entry:hover{
+			background-color: silver;
+		}
+
+		.player-menu-settings-entry-active{
+			color:#00aee7;
+		}
+
+	.player_content{
+		position: absolute;
+		top: 82px;
+		left: 220px;
+		right: 220px;
+		bottom: 70px;
+		float: left;
+
+		overflow: auto;
+
+		background-color: white;
+		padding: 10px;
+		border: 1px solid #d8d8d8;
+		border-radius: 3px;
+	}
+
+		.player-lyrics{
+			font-size: 24px;
+		}
+
+	.player-roominfo{
+		position: fixed;
+		right: 0;
+		top: 62px;
+		bottom: 50px;
+
+		width: 200px;
+
+		background-color: #fafafa;
+	}
+
+	.player-info-badge{
+		width: 188px;
+
+		background-color: lightblue;
+		margin: 3px;
+		padding: 3px;
+
+		text-align: center;
+		line-height: 25px;
+	}
+
+		.player-info-badge-image{
+			float: left;
+		}
+
+	.player-timeline{
+		height: 50px;
+		width: 100%;
+		background-color: #fafafa;
+
+		position: fixed;
+		bottom: 0;
+
+		color: #333;
+		line-height: 50px;
+
+		box-shadow: 0 0 20px black;
+	}
+
+		.player-songcover{
+			float: left;
+			height: 64px;
+			margin-top:-14px;
+		}
+
+		.player-songtitle{
+			float: left;
+			margin-left: 15px;
+			font-size: 2em;
+		}
+
+		.player-timer{
+			float: right;
+			margin-right: 25px;
+		}
